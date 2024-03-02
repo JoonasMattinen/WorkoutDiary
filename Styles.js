@@ -40,9 +40,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',   
     justifyContent: 'space-evenly',
   },
-  chip: {
-    borderTopWidth: 1,
-  },
   radiobutton: {
     backgroundColor: '#E8D33F',
     borderWidth: 1,
