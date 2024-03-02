@@ -28,7 +28,7 @@ export default function Workouts() {
   return (
     <View>
       <ScrollView>
-        <Card>
+        <Card style={styles.addWorkoutContainer}>
           <Card.Content style={styles.card}>
             <Chip style={styles.chip} icon="run">
               {totals.run.toFixed(0)} {unit}
@@ -42,17 +42,17 @@ export default function Workouts() {
           </Card.Content>
         </Card>
         {workouts.map((workout, index) => (
-          <Card key={index} mode="outlined">
+          <Card style={styles.addWorkoutContainer} key={index} mode="outlined">
             <Card.Content>
               <IconButton icon={workout.workoutType} mode="contained" />
               <Card.Title title={"Day: " + workout.date} />
-              <Text>Distance: {''}
+              <Text>Distance:
                 {unit === "Mi"
                   ? (workout.distance * 0.62).toFixed(0)
                   : workout.distance}
                 {unit}
               </Text>
-              <Text>Duration: {workout.duration}Min</Text>
+              <Text>Duration:{workout.duration}Min</Text>
             </Card.Content>
           </Card>
         ))}

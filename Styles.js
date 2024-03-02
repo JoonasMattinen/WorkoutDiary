@@ -1,6 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#B7F0AD',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   pressable: {
     marginTop: 20,
     padding: 10,
@@ -10,15 +16,25 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 18,
   },
+  header:{
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  customFont: {
+    fontFamily: 'kodemono',
+    fontSize: 20,
+  },
   segmentedButtons: {
-    margin: 10,
+    margin: 19,
+    borderRadius: 20,
   },
   addWorkoutButton: {
     margin: 10,
   },
-  addWorkouContainer: {
+  addWorkoutContainer: {
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: '#B7F0AD'
   },
   card:{
     flexDirection: 'row',   
@@ -27,12 +43,14 @@ const styles = StyleSheet.create({
   chip: {
     borderTopWidth: 1,
   },
-  radiobuttonContainer: {
-    flex: 1,
-    justifyContent: 'center',
-  },
   radiobutton: {
+    backgroundColor: '#E8D33F',
+    borderWidth: 1,
+    borderRadius: 10,
     margin: 10,
+  },
+  calendar: {
+    marginTop: 50,
   },
 });
 

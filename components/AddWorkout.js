@@ -1,19 +1,38 @@
 import React, { useContext } from 'react';
 import { WorkoutContext } from '../WorkoutContext';
-import { Modal, Pressable, StyleSheet, View, SafeAreaView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Modal, Pressable, View, SafeAreaView, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { SegmentedButtons, TextInput , Button, Chip } from 'react-native-paper';
 import styles from '../Styles';
+import { Text } from 'react-native';
 
 
 export default function AddWorkout() {
 
   const { visible, setVisible, date, setDate, workoutType, setWorkoutType, distance, setDistance, duration, setDuration, workouts, setWorkouts, unit } = useContext(WorkoutContext);
 
+  const validateDistance = (distance) => {
+    if (distance > 200 || distance < 0) {
+      Alert.alert('Invalid value', 'value must be between 0 and 200');
+      setDistance('');
+    }
+    else {
+      setDistance(distance);
+    }
+  }
 
+  const validateDuration = (duration) => {
+    if (duration > 400 || duration < 0) {
+      Alert.alert('Invalid value', 'value must be between 0 and 200');
+      setDuration('');
+    }
+    else {
+      setDuration(duration);
+    }
+  }
 
-  function handleDate(selectedDate) {
-    setDate(selectedDate.dateString); // Assuming you want to store the date as a string
+  const handleDate = (date) => {
+    setDate(date.dateString); // Assuming you want to store the date as a string
     setVisible(false);
   }
 
@@ -38,16 +57,19 @@ export default function AddWorkout() {
 
   return (
     <TouchableWithoutFeedback accessible={false} onPress={() => Keyboard.dismiss()}>
-      <View style={styles.addWorkouContainer}>
+      <View style={styles.addWorkoutContainer}>
         <SafeAreaView>
+        <View style={styles.header}>
+        <Text style={styles.customFont}>Workout Diary</Text>
+        </View>
           <SegmentedButtons
             style={styles.segmentedButtons}
             value={workoutType}
             onValueChange={setWorkoutType}
             buttons={[
-              { icon: 'run', value: 'run', label: 'Running' },
-              { icon: 'bike', value: 'bike', label: 'Cycling' },
-              { icon: 'swim', value: 'swim', label: 'Swimming' },
+              { icon: 'run', value: 'run', label: 'Running', checkedColor: '#D17B0F'},
+              { icon: 'bike', value: 'bike', label: 'Cycling', checkedColor: '#D17B0F'},
+              { icon: 'swim', value: 'swim', label: 'Swimming', checkedColor: '#D17B0F'},
             ]}
           />
         </SafeAreaView>      
@@ -55,18 +77,22 @@ export default function AddWorkout() {
           label={`Distance (${unit})`}
           keyboardType='number-pad'
           value={distance}
-          onChangeText={setDistance}
+          onChangeText={validateDistance}
           clearButtonMode='while-editing'
         />
         <TextInput
           label="Duration(min)"
           keyboardType='number-pad'
           value={duration}
-          onChangeText={setDuration}
+          onChangeText={validateDuration}
           clearButtonMode='while-editing'
         />
         <Modal visible={visible} transparent={true}>
-          <Calendar onDayPress={handleDate} />
+          <Calendar 
+          style={styles.calendar}
+          onDayPress={handleDate} 
+          disableAllTouchEventsForDisabledDays={true}
+          />          
         </Modal>
         <Pressable style={styles.pressable} onPress={() => setVisible(true)}>
           <Chip icon={'calendar'} style={styles.pressableText}>{date || 'Select date'}</Chip>

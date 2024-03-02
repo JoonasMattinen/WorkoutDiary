@@ -1,18 +1,25 @@
 import React, { useContext } from "react";
 import { WorkoutContext } from "../WorkoutContext";
-import { Card, RadioButton, } from "react-native-paper";
+import { RadioButton, } from "react-native-paper";
 import styles from "../Styles";
+import { View } from "react-native";
 
 export default function Settings() {
 
     const { unit, setUnit } = useContext(WorkoutContext);
 
     return (
-        <Card style={styles.radiobuttonContainer} mode="outlined">
-            <RadioButton.Group onValueChange={(newUnit) => setUnit(newUnit)} value={unit}>
-                <RadioButton.Item style={styles.radiobutton} label="Kilometers" value="Km" />
-                <RadioButton.Item style={styles.radiobutton} label="Miles" value="Mi" />
-            </RadioButton.Group>
-        </Card>
+        <View style={styles.container}>
+        <RadioButton.Group onValueChange={(newUnit) => setUnit(newUnit)} value={unit}>
+            <View style={styles.radioButtonContainer}>
+                <View style={styles.radiobutton}>
+                    <RadioButton.Item labelVariant="headlineLarge" label="Kilometers" value="Km" />
+                </View>
+                <View style={styles.radiobutton}>
+                    <RadioButton.Item labelVariant="headlineLarge" label="Miles" value="Mi" />
+                </View>
+            </View>
+        </RadioButton.Group>
+        </View>
     );
   }

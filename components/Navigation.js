@@ -6,6 +6,7 @@ import Settings from "./Settings";
 import { Entypo } from "@expo/vector-icons";
 
 
+
 export default function Navigation() {
   
     const Tab = createBottomTabNavigator();
