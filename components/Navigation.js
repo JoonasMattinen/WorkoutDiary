@@ -21,6 +21,9 @@ export default function Navigation() {
                 tabBarIcon: ({ color, size }) => (
                   <Entypo name="home" size={size} color={color} />
                 ),
+                tabBarLabelStyle: { fontFamily: 'kodemono', fontSize: 12, color: 'black'},
+                tabBarActiveTintColor: '#B7F0AD',
+                tabBarInactiveTintColor: '#E8D33F',
               }}
             />
             <Tab.Screen
@@ -30,6 +33,9 @@ export default function Navigation() {
                 tabBarIcon: ({ color, size }) => (
                   <Entypo name="list" size={size} color={color} />
                 ),
+                tabBarLabelStyle: { fontFamily: 'kodemono', fontSize: 12, color: 'black'},
+                tabBarActiveTintColor: '#B7F0AD',
+                tabBarInactiveTintColor: '#E8D33F',
               }}
             />
             <Tab.Screen
@@ -39,6 +45,9 @@ export default function Navigation() {
                 tabBarIcon: ({ color, size }) => (
                   <Entypo name="user" size={size} color={color} />
                 ),
+                tabBarLabelStyle: { fontFamily: 'kodemono', fontSize: 12, color: 'black'},
+                tabBarActiveTintColor: '#B7F0AD',
+                tabBarInactiveTintColor: '#E8D33F',
               }}
             />
           </Tab.Navigator>
