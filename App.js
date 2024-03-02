@@ -25,7 +25,9 @@ const theme = {
   colors: {
     ...MD3LightTheme.colors,
     primary: "#D17B0F",
-    secondary: "yellow",
+    secondary: "#yellow",
+    secondaryContainer: "#E8D33F",
+    onSecondaryContainer: "black",
   },  
 };
 
