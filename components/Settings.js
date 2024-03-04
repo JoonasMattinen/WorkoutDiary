@@ -13,10 +13,10 @@ export default function Settings() {
         <RadioButton.Group onValueChange={(newUnit) => setUnit(newUnit)} value={unit}>
             <View style={styles.radioButtonContainer}>
                 <View style={styles.radiobutton}>
-                    <RadioButton.Item labelVariant="headlineLarge" label="Kilometers" value="Km" />
+                    <RadioButton.Item labelStyle={styles.customFont} labelVariant="headlineLarge" label="Kilometers" value="Km" />
                 </View>
                 <View style={styles.radiobutton}>
-                    <RadioButton.Item labelVariant="headlineLarge" label="Miles" value="Mi" />
+                    <RadioButton.Item labelStyle={styles.customFont} labelVariant="headlineLarge" label="Miles" value="Mi" />
                 </View>
             </View>
         </RadioButton.Group>

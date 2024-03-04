@@ -11,12 +11,14 @@ export default function AddWorkout() {
 
   const { visible, setVisible, date, setDate, workoutType, setWorkoutType, distance, setDistance, duration, setDuration, workouts, setWorkouts, unit } = useContext(WorkoutContext);
 
-  const validateDistance = (distance) => {
-    if (distance > 200 || distance < 0) {
-      Alert.alert('Invalid value', 'value must be between 0 and 200');
+  const validateDistance = (input) => {
+    const distance = input.replace(',', '.');
+    const numericDistance = parseFloat(distance);
+    
+    if (isNaN(numericDistance) || numericDistance > 200 || numericDistance < 0) {
+      Alert.alert('Invalid value', 'Value must be between 0 and 200');
       setDistance('');
-    }
-    else {
+    } else {
       setDistance(distance);
     }
   }
@@ -31,33 +33,40 @@ export default function AddWorkout() {
     }
   }
 
+  
+
   const handleDate = (date) => {
-    setDate(date.dateString); // Assuming you want to store the date as a string
+    setDate(date.dateString);
     setVisible(false);
   }
 
   const addWorkout = () => {
-    // Create a new workout object with the current state values
+    console.log("Entered Distance: ", distance);
+  
+    // Convert distance to kilometers if the current unit is miles
+    const distanceInKilometers = unit === "Mi" ? parseFloat(distance) / 0.621371 : parseFloat(distance);
+  
     const newWorkout = {
       date,
       workoutType,
-      distance,
+      distance: distanceInKilometers,
       duration,
     };
-
-    // Add the new workout to the workouts array
+  
     setWorkouts([...workouts, newWorkout]);
-    // Optionally, reset the form fields here
+  
     setDate('');
     setWorkoutType('');
     setDistance('');
     setDuration('');
-    console.log(workouts); // Log the updated workouts array for debugging
+  
+    console.log("Updated Workouts Array: ", workouts);
   };
+  
 
   return (
     <TouchableWithoutFeedback accessible={false} onPress={() => Keyboard.dismiss()}>
-      <View style={styles.addWorkoutContainer}>
+      <View style={styles.container}>
         <SafeAreaView>
         <View style={styles.header}>
         <Text style={styles.customFont}>Workout Diary</Text>
@@ -67,25 +76,27 @@ export default function AddWorkout() {
             value={workoutType}
             onValueChange={setWorkoutType}
             buttons={[
-              { icon: 'run', value: 'run', label: 'Running', checkedColor: '#D17B0F'},
-              { icon: 'bike', value: 'bike', label: 'Cycling', checkedColor: '#D17B0F'},
-              { icon: 'swim', value: 'swim', label: 'Swimming', checkedColor: '#D17B0F'},
+              { icon: 'run', value: 'run', label: 'Running', checkedColor: '#D17B0F', labelStyle: styles.customFontSmall},
+              { icon: 'bike', value: 'bike', label: 'Cycling', checkedColor: '#D17B0F', labelStyle: styles.customFontSmall},
+              { icon: 'swim', value: 'swim', label: 'Swimming', checkedColor: '#D17B0F', labelStyle: styles.customFontSmall},
             ]}
           />
         </SafeAreaView>      
         <TextInput
           label={`Distance (${unit})`}
-          keyboardType='number-pad'
+          keyboardType='numeric'
           value={distance}
           onChangeText={validateDistance}
           clearButtonMode='while-editing'
+          returnKeyType='done'
         />
         <TextInput
-          label="Duration(min)"
-          keyboardType='number-pad'
+          label="Duration (Min)"
+          keyboardType='numeric'
           value={duration}
           onChangeText={validateDuration}
           clearButtonMode='while-editing'
+          returnKeyType='done'
         />
         <Modal visible={visible} transparent={true}>
           <Calendar 
@@ -99,7 +110,7 @@ export default function AddWorkout() {
         </Pressable>
         <Button style={styles.addWorkoutButton} icon='send' mode='elevated' title="Add Workout" onPress={addWorkout}
         disabled={date === '' || workoutType === '' || distance === '' || duration === ''}
-        > Add Workout</Button>
+        labelStyle={styles.customFont}> Add Workout</Button>
       </View>
     </TouchableWithoutFeedback>
   );

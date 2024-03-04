@@ -18,9 +18,6 @@ const theme = {
   fonts: {
     ...MD3LightTheme.fonts,
     regular: { fontFamily: 'kodemono', fontWeight: 'normal' },
-    medium: { fontFamily: 'kodemono', fontWeight: 'normal' },
-    light: { fontFamily: 'kodemono', fontWeight: 'normal' },
-    thin: { fontFamily: 'kodemono', fontWeight: 'normal' },
   },
   colors: {
     ...MD3LightTheme.colors,

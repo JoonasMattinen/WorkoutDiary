@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#B7F0AD',
-    alignItems: 'center',
     justifyContent: 'center',
   },
   pressable: {
@@ -24,6 +23,10 @@ const styles = StyleSheet.create({
     fontFamily: 'kodemono',
     fontSize: 20,
   },
+  customFontSmall: {
+    fontFamily: 'kodemono',
+    fontSize: 15,
+  },
   segmentedButtons: {
     margin: 19,
     borderRadius: 20,
@@ -31,18 +34,30 @@ const styles = StyleSheet.create({
   addWorkoutButton: {
     margin: 10,
   },
-  addWorkoutContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#B7F0AD'
+  cardContainer: {
+    margin: 10,
+    borderRadius: 8,
+    elevation: 3,
+    backgroundColor: '#B7F0AD',
   },
-  card:{
-    flexDirection: 'row',   
-    justifyContent: 'space-evenly',
+  card: {
+    padding: 15,
+    gap: 5,
+  },
+  cardContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  detailText: {
+    fontSize: 16,
+    color: '#666',
+  },
+  chip: {
+    margin: 5,
   },
   radiobutton: {
     backgroundColor: '#E8D33F',
-    borderWidth: 1,
     borderRadius: 10,
     margin: 10,
   },
