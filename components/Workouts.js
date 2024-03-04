@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { WorkoutContext } from '../WorkoutContext';
-import { Button, ScrollView, Text, View } from 'react-native';
-import { Card, Chip, IconButton } from 'react-native-paper';
-import styles from '../Styles';
+import React, { useContext, useEffect, useState } from "react";
+import { WorkoutContext } from "../WorkoutContext";
+import { Button, ScrollView, Text, View } from "react-native";
+import { Card, Chip, IconButton } from "react-native-paper";
+import styles from "../Styles";
 
 export default function Workouts() {
   const { workouts, unit } = useContext(WorkoutContext);
@@ -15,7 +15,7 @@ export default function Workouts() {
     workouts.forEach((workout) => {
       const distance =
         unit === "Mi"
-          ? Number(workout.distance) * 0.62
+          ? Number(workout.distance) * 0.621371
           : Number(workout.distance);
       if (workout.workoutType in initialTotals) {
         initialTotals[workout.workoutType] += distance;
@@ -28,31 +28,36 @@ export default function Workouts() {
   return (
     <View>
       <ScrollView>
-        <Card style={styles.addWorkoutContainer}>
+        <Card style={styles.container}>
           <Card.Content style={styles.card}>
             <Chip style={styles.chip} icon="run">
-              {totals.run.toFixed(0)} {unit}
+              {totals.run.toFixed(2)} {unit}
             </Chip>
             <Chip style={styles.chip} icon="bike">
-              {totals.bike.toFixed(0)} {unit}
+              {totals.bike.toFixed(2)} {unit}
             </Chip>
             <Chip style={styles.chip} icon="swim">
-              {totals.swim.toFixed(0)} {unit}
+              {totals.swim.toFixed(2)} {unit}
             </Chip>
           </Card.Content>
         </Card>
         {workouts.map((workout, index) => (
-          <Card style={styles.addWorkoutContainer} key={index} mode="outlined">
-            <Card.Content>
-              <IconButton icon={workout.workoutType} mode="contained" />
-              <Card.Title title={"Day: " + workout.date} />
-              <Text>Distance:
-                {unit === "Mi"
-                  ? (workout.distance * 0.62).toFixed(0)
-                  : workout.distance}
-                {unit}
-              </Text>
-              <Text>Duration:{workout.duration}Min</Text>
+          <Card style={styles.container} key={index} mode="outlined">
+            <Card.Content style={styles.card}>
+              <IconButton icon={workout.workoutType} mode="outlined" />
+              <Text style={styles.customFontSmall}>Day: {workout.date}</Text>
+              <View style={styles.cardContent}>
+                <Text style={styles.customFontSmall}>
+                  Distance:{" "}
+                  {unit === "Mi"
+                    ? (parseFloat(workout.distance) * 0.621371).toFixed(2)
+                    : parseFloat(workout.distance).toFixed(2)}
+                  {unit}
+                </Text>
+                <Text style={styles.customFontSmall}>
+                  Duration: {workout.duration} Min
+                </Text>
+              </View>
             </Card.Content>
           </Card>
         ))}
@@ -60,5 +65,3 @@ export default function Workouts() {
     </View>
   );
 }
-
-
